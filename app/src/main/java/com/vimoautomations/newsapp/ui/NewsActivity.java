@@ -30,12 +30,12 @@ public class NewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         Log.i("Item selected ID"," clicked item"+ bottomNavigationView.getSelectedItemId());
-        getSuperHeroes();
+        getSuperHeroes("elon musk");
     }
 
-    private void getSuperHeroes() {
+    private void getSuperHeroes(String search) {
         retrofit2.Call<News> call = RetrofitClient.getInstance().getMyApi().getNewsEveryThing("" +
-                "bitcoin", AppConfig.publishSortOrder, AppConfig.apiKey);
+                search, AppConfig.publishSortOrder, AppConfig.apiKey);
         call.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
@@ -44,10 +44,9 @@ public class NewsActivity extends AppCompatActivity {
                 List<Article> list= myheroList.getArticles();
                 for (int i = 0; i < list.size(); i++) {
                     oneHeroes[i] = myheroList.getArticles().get(i).author;
-                    Log.e(TAG, "AutherName:  "+ myheroList.getArticles().get(i).author);
+                    Log.d(TAG, "AutherName:  "+ myheroList.getArticles().get(i).author);
                 }
                 //superListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, oneHeroes));
-
             }
 
             @Override
