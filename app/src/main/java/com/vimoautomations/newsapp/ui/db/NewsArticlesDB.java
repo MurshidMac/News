@@ -27,7 +27,7 @@ public abstract class NewsArticlesDB extends RoomDatabase {
     private static final String DB_NAME = AppConfig.DATABASE_NAME;
     private static volatile NewsArticlesDB instance;
 
-    public static synchronized NewsArticlesDB getInstance(Context context) {
+    static synchronized NewsArticlesDB getInstance(Context context) {
         if (instance == null) {
             instance = create(context);
         }
