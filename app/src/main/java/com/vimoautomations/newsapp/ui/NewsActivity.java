@@ -1,6 +1,8 @@
 package com.vimoautomations.newsapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,8 +12,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.vimoautomations.newsapp.R;
 import com.vimoautomations.newsapp.ui.contants.AppConfig;
 import com.vimoautomations.newsapp.ui.api.RetrofitClient;
+import com.vimoautomations.newsapp.ui.db.NewsArticlesDB;
 import com.vimoautomations.newsapp.ui.models.Article;
 import com.vimoautomations.newsapp.ui.models.News;
+import com.vimoautomations.newsapp.ui.repositories.NewsRepository;
+import com.vimoautomations.newsapp.ui.viewmodels.NewsViewModel;
+import com.vimoautomations.newsapp.ui.viewmodels.NewsViewModelProviderFactory;
 
 import java.util.List;
 
@@ -23,38 +29,22 @@ import retrofit2.Response;
 public class NewsActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    NewsRepository repo;
+    NewsViewModelProviderFactory factory;
+    public NewsViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+
+        NewsRepository repo = new NewsRepository(this);
+        NewsViewModelProviderFactory factory = new NewsViewModelProviderFactory(repo);
+        NewsViewModel viewModel = new ViewModelProvider(this, factory).get(NewsViewModel.class);
+        viewModel.load("us", 20);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         Log.i("Item selected ID"," clicked item"+ bottomNavigationView.getSelectedItemId());
-        getSuperHeroes();
     }
 
-    private void getSuperHeroes() {
-        retrofit2.Call<News> call = RetrofitClient.getInstance().getMyApi().getNewsEveryThing("" +
-                "bitcoin", AppConfig.publishSortOrder, AppConfig.apiKey);
-        call.enqueue(new Callback<News>() {
-            @Override
-            public void onResponse(Call<News> call, Response<News> response) {
-                News myheroList = response.body();
-                String[] oneHeroes = new String[myheroList.getArticles().size()];
-                List<Article> list= myheroList.getArticles();
-                for (int i = 0; i < list.size(); i++) {
-                    oneHeroes[i] = myheroList.getArticles().get(i).author;
-                    Log.e(TAG, "AutherName:  "+ myheroList.getArticles().get(i).author);
-                }
-                //superListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, oneHeroes));
 
-            }
-
-            @Override
-            public void onFailure(Call<News> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
-            }
-
-        });
-    }
 }
