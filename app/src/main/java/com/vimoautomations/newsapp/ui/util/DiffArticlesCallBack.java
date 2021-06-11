@@ -13,6 +13,6 @@ public class DiffArticlesCallBack extends DiffUtil.ItemCallback<Article> {
 
     @Override
     public boolean areContentsTheSame(@NonNull  Article oldItem, @NonNull Article newItem) {
-        return oldItem == newItem;
+        return (oldItem == newItem);
     }
 }

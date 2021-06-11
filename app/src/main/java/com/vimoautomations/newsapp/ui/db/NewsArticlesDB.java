@@ -38,7 +38,7 @@ public abstract class NewsArticlesDB extends RoomDatabase {
     @NotNull
     private static NewsArticlesDB create(final Context context) {
         return Room.databaseBuilder(
-                context.getApplicationContext(),
+                context,
                 NewsArticlesDB.class,
                 DB_NAME).build();
     }

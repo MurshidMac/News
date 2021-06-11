@@ -1,12 +1,11 @@
 package com.vimoautomations.newsapp.ui.api;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LiveData;
 
 import com.vimoautomations.newsapp.ui.models.News;
 
-import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

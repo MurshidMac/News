@@ -8,6 +8,7 @@ import com.vimoautomations.newsapp.ui.repositories.NewsRepository;
 
 import org.jetbrains.annotations.NotNull;
 
+
 public class NewsViewModelProviderFactory implements ViewModelProvider.Factory {
 
     NewsRepository repository;
@@ -19,6 +20,9 @@ public class NewsViewModelProviderFactory implements ViewModelProvider.Factory {
     @NotNull
     @Override
     public <T extends ViewModel> T create(@NonNull @NotNull Class<T> modelClass) {
-        return (T) new NewsViewModel(this.repository);
+        //if(modelClass.isAssignableFrom(NewsViewModel.class)){
+            return (T) new NewsViewModel(this.repository);
+        //}
+        //throw new IllegalArgumentException("Unknown ViewModel Class");
     }
 }

@@ -3,6 +3,10 @@ package com.vimoautomations.newsapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -32,18 +36,25 @@ public class NewsActivity extends AppCompatActivity {
     NewsRepository repo;
     NewsViewModelProviderFactory factory;
     public NewsViewModel viewModel;
+    private NewsArticlesDB db;
+
+    public NewsActivity(){
+        super(R.layout.activity_news);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
-
-        NewsRepository repo = new NewsRepository(this);
-        NewsViewModelProviderFactory factory = new NewsViewModelProviderFactory(repo);
-        NewsViewModel viewModel = new ViewModelProvider(this, factory).get(NewsViewModel.class);
-        viewModel.load("us", 20);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        Log.i("Item selected ID"," clicked item"+ bottomNavigationView.getSelectedItemId());
+        repo = new NewsRepository(this, db);
+        db = NewsArticlesDB.getInstance(this);
+        viewModel = new NewsViewModel(repo);
+        factory = new NewsViewModelProviderFactory(repo);
+        viewModel = new ViewModelProvider(this, factory).get(NewsViewModel.class);
+        Log.i("Item selected ID"," clicked item "+ bottomNavigationView.getSelectedItemId());
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.newsNavHostFragment);
+        NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.getNavController());
     }
 
 

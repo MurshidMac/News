@@ -1,7 +1,9 @@
 package com.vimoautomations.newsapp.ui.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +26,6 @@ public class SaveNewsFragment extends Fragment {
         viewModel = parentActivity.viewModel;
 
     }
-
 
     public SaveNewsFragment(){
         super(R.layout.fragment_saved_news);

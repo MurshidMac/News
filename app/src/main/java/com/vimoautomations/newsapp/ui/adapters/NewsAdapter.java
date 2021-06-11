@@ -22,16 +22,16 @@ import com.vimoautomations.newsapp.ui.util.DiffArticlesCallBack;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ArticleViewHolder> {
 
-    DiffArticlesCallBack callBack = new DiffArticlesCallBack();
-    AsyncListDiffer<Article> differ = new AsyncListDiffer<>(this, callBack);
+    public DiffArticlesCallBack callBack = new DiffArticlesCallBack();
+    public AsyncListDiffer<Article> differ = new AsyncListDiffer<>(this, callBack);
     Context mContext;
     public NewsAdapter(Context context){
-        mContext = context;
+        this.mContext = context;
     }
     @NonNull
     @Override
     public NewsAdapter.ArticleViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
-        return new ArticleViewHolder(LayoutInflater.from(parent.getContext())
+        return new ArticleViewHolder(LayoutInflater.from(this.mContext)
                 .inflate(R.layout.item_article_preview,parent,false));
     }
 
@@ -43,7 +43,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ArticleViewHol
 //                .placeholder(R.mipmap.ic_launcher_round)
 //                .error(R.mipmap.ic_launcher_round);
 
-        Glide.with(mContext).load(article.urlToImage)
+        Glide.with(this.mContext).load(article.urlToImage)
                 .into(holder.ivArticleImage);
 //        RequestManager manager = Glide.with(holder.ivArticleImage);
 //        manager.load(article.urlToImage).into(holder.ivArticleImage);
