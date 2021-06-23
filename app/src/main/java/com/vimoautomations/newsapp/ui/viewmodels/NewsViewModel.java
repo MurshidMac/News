@@ -27,7 +27,7 @@ public class NewsViewModel extends ViewModel {
     Disposable compositeDisposable = new CompositeDisposable();
     public MutableLiveData<Resource<News>> breakingNewsLivedata;
     public Integer breakingNewsPage = 2;
-    Call<News> newsResponse;
+    public Call<News> newsResponse;
 
     public NewsViewModel(NewsRepository repository){
         this.repository = repository;
@@ -43,12 +43,12 @@ public class NewsViewModel extends ViewModel {
     public Call<News> load(String countryCode, Integer pagenumber){
         if(breakingNewsLivedata == null){
             breakingNewsLivedata = new MutableLiveData<>();
-            getBreakingNews("us");
+            breakingNewsLivedata = getBreakingNews("us");
         }
         return this.repository.getBreakingNews(countryCode, breakingNewsPage);
     }
 
-    public LiveData<Resource<News>> getBreakingNews(String countryCode) {
+    public MutableLiveData<Resource<News>> getBreakingNews(String countryCode) {
         newsResponse = this.repository.getBreakingNews(countryCode, breakingNewsPage);
         breakingNewsLivedata.postValue(new Resource.Load<News>(new News()));
         breakingNewsLivedata.postValue(handleBreakingNewsResponse(newsResponse));

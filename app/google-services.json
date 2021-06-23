@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "799118165060",
+    "project_id": "news-vimoautomations",
+    "storage_bucket": "news-vimoautomations.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799118165060:android:5b54cad4d6e8bc8786a811",
+        "android_client_info": {
+          "package_name": "com.vimoautomations.newsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799118165060-kqg4pvf11bvlb16kdo5tvhj2828vpvvn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzkizrFQ-aXGFBIFeoFPAeDKRpQ6GJOss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799118165060-kqg4pvf11bvlb16kdo5tvhj2828vpvvn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
