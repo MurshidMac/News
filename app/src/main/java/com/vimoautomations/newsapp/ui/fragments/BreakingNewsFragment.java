@@ -46,7 +46,7 @@ public class BreakingNewsFragment extends Fragment {
         viewModel = parentActivity.viewModel;
         setRecyclerView();
         progressbar = view.findViewById(R.id.paginationProgressBar_breaking);
-        loadMutableData();
+        //loadMutableData();
     }
 
     private void hideProgressBar() {
